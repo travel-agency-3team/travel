@@ -13,16 +13,15 @@ public:
     MYSQL_RES *sql_result;
     MYSQL_ROW sql_row;
 
-    
     Database()
     {
         mysql_init(&conn);
         mysql_options(&conn, MYSQL_SET_CHARSET_NAME, "utf8");
         connection = mysql_real_connect(&conn, "localhost", "admin", "1234", "ocean", 3306, NULL, 0);
-        if(connection==NULL)
+        if (connection == NULL)
         {
             fprintf(stderr, "Failed to connect to databases: Error: %s\n",
-            mysql_error(&conn));
+                    mysql_error(&conn));
             return;
         }
         else

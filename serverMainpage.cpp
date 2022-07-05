@@ -7,8 +7,9 @@ void Page::ShowMenu()
     cout << "== 여행사 관리 서버 ==" << endl;
     cout << "1) 회원관리" << endl;
     cout << "2) 관광지 관리" << endl;
-    cout << "3) header/가이드 관리" << endl;
-    cout << "5) 종료"<<endl;
+    cout << "3) 슉박 관리" << endl;
+    cout << "4) 가이드 관리" <<endl;
+    cout << "5) 종료" <<endl;
     cout << "번호를 선택하세요" << endl;
 }
 

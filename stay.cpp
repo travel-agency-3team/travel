@@ -16,7 +16,7 @@ void Stay::Check()
     {
         DB.sql_result = mysql_store_result(&DB.conn);
         while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL)
-            cout << DB.sql_row[0] << ") " << DB.sql_row[1] << " 주소 : " << DB.sql_row[3] << "  전화번호 : " << DB.sql_row[2] << endl;
+            cout << DB.sql_row[0] << ") " << DB.sql_row[1] << " 주소 : " << DB.sql_row[2] << "  전화번호 : " << DB.sql_row[3] << endl;
     }
 }
 

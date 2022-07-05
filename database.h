@@ -7,14 +7,13 @@
 
 class Database
 {
-protected:
+
+public:
     MYSQL *connection = NULL, conn;
     MYSQL_RES *sql_result;
     MYSQL_ROW sql_row;
-    MYSQL_ROW row;
 
-
-public:
+    
     Database()
     {
         mysql_init(&conn);

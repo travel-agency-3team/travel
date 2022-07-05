@@ -19,7 +19,8 @@ void Page::Select()
     switch(choice)
     {
         case 1:
-
+            member.Menu();
+            member.Sel();
             break;
         case 2:
 

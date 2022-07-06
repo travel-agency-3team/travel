@@ -2,6 +2,7 @@
 #define __MANAGE_H__
 
 #include <iostream>
+#include <stdlib.h>
 #include "database.h"
 
 class Manage

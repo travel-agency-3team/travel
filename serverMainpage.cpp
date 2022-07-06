@@ -1,5 +1,6 @@
 #include "header/serverMainpage.h"
 
+
 using namespace std;
 
 void Page::ShowMenu()
@@ -16,6 +17,8 @@ void Page::ShowMenu()
 int Page::Select()
 {
     cin >> choice;
+    system("clear");
+    
     switch (choice)
     {
     case 1:
@@ -35,6 +38,7 @@ int Page::Select()
         guide.MenuSelect();
         break;
     case 5:
+        cout<<"종료합니다"<<endl;
         return 1;
     default:
         cout << "잘못 입력하셨습니다" << endl;

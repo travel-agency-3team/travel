@@ -12,22 +12,27 @@ void Member::Menu()
 void Member::Sel()
 {
     cin >> choice;
+    system("clear");
     switch (choice)
     {
     case 1:
         Check();
+        cout<<endl;
         break;
     case 2:
         Modify();
+        cout<<endl;
         break;
     case 3:
         Delete();
+        cout<<endl;
         break;
     case 4:
         Withdraw();
+        cout<<endl;
         break;
     default:
-        cout << "잘못 입력" << endl;
+        cout << "잘못 입력하셨습니다" << endl<<endl;
         break;
     }
 }
@@ -103,7 +108,6 @@ void Member::Modify()
     }
     cin >> change;
     sprintf(query, "UPDATE %s SET %s ='%s' where id = '%s'", grade.c_str(), column.c_str(), change.c_str(), ID.c_str());
-    cout << query << endl;
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else
@@ -140,7 +144,6 @@ void Member::Delete()
     cout << "회원 ID를 입력하세요" << endl;
     cin >> ID;
     sprintf(query, "DELETE FROM %s WHERE id = '%s'", grade.c_str(), ID.c_str());
-    cout << query << endl;
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else

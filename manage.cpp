@@ -1,18 +1,22 @@
 #include "header/manage.h"
+
 using namespace std;
 
 void Manage::MenuSelect()
 {
     cin >> choice;
     cin.ignore();
+    system("clear");
     switch (choice)
     {
     case 1:
         Check();
+        cout<<endl;
         break;
     case 2:
         ManageMenu();
         ManageSelect();
+        cout<<endl;
         break;
     dafault:
         cout << "잘못 선택하셨습니다" << endl;
@@ -31,19 +35,23 @@ void Manage::ManageSelect()
 {
     cin >> choice;
     cin.ignore();
+    system("clear");
     switch (choice)
     {
     case 1:
         ManageCheck();
+        cout<<endl;
         break;
     case 2:
         ManageModify();
+        cout<<endl;
         break;
     case 3:
         ManageDelete();
+        cout<<endl;
         break;
     default:
-        cout << "잘못 입력하셨습니다" << endl;
+        cout << "잘못 입력하셨습니다" << endl<<endl;
         return;
     }
 }

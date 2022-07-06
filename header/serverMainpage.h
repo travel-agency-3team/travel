@@ -2,6 +2,7 @@
 #define __SERVERMAINPAGE_H_
 
 #include <iostream>
+#include <stdlib.h>
 #include "member.h"
 #include "visit.h"
 #include "stay.h"

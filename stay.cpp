@@ -46,6 +46,18 @@ void Stay::ManageModify()
     string column, change;
     cout << "수정할 예약 번호를 입력하세요" << endl;
     cin >> num;
+    sprintf(query, "SELECT num FROM staylist WHERE num = %d", num);
+    if (mysql_query(&DB.conn, query) != 0)
+            fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
+    else
+    {
+        DB.sql_result = mysql_store_result(&DB.conn);
+        if (mysql_affected_rows(&DB.conn) == 0)
+        {
+            cout << "없는 번호입니다" << endl;
+            return;
+        }
+    }
     cout << "수정할 내역을 선택하세요" << endl;
     cout << "1) 예약장소\t2) 예약날짜" << endl;
     cin >> choose;
@@ -54,16 +66,87 @@ void Stay::ManageModify()
     case 1:
         column = "stayname";
         cout << "장소 입력" << endl;
+        cin >> change;
+        sprintf(query, "SELECT stayname FROM stay WHERE stayname = '%s'", change.c_str());
+        cout<<query<<endl;
+        if (mysql_query(&DB.conn, query) != 0)
+            fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
+        else
+        {
+            DB.sql_result = mysql_store_result(&DB.conn);
+            if (mysql_affected_rows(&DB.conn) == 0)
+            {
+                cout << "등록되지 않은 숙소입니다" << endl;
+                return;
+            }
+        }
         break;
     case 2:
+        int year, month, day;
         column = "staydate";
-        cout << "날짜 입력" << endl;
+        cout << "연도 입력 ex)2022" << endl;
+        cin >> year;
+        if(year<2022)
+        {
+            cout<<"예약불가능한 연도입니다"<<endl;
+            return;
+        }
+        else
+            change = to_string(year);
+
+        cout <<"월 입력 ex) 5"<< endl;
+        cin>> month;
+        if(month>0 && month<13)
+        {
+            if(month<10)
+                change = change + "0";
+
+            change = change + to_string(month);
+
+        }
+        else
+        {
+            cout<<"월 입력이 잘못되었습니다"<<endl;
+            return;
+        }
+        cout <<"일 입력 ex) 10" << endl;
+        cin>>day;
+        if(month == 1 || month == 3 || month == 5 || month ==7 || month == 8 || month == 10 || month == 12)
+        {
+            if(day>0 && day<32)
+            {
+                if(day<10)
+                    change = change + "0";
+                
+                change = change + to_string(day);
+            }
+            else
+            {
+                cout<<"잘못된 날짜입니다"<<endl;
+                return;
+            }
+        } 
+        else
+        {
+            if(day>0 && day<31)
+            {
+                if(day<10)
+                    change = change + "0";
+                
+                change = change + to_string(day);
+            }
+            else
+            {
+                cout<<"잘못된 날짜입니다"<<endl;
+                return;
+            }
+        }
         break;
     default:
         cout << "잘못 입력하셨습니다" << endl;
         return;
     }
-    cin >> change;
+
     sprintf(query, "UPDATE staylist SET %s ='%s' where num = %d", column.c_str(), change.c_str(), num);
     cout << query << endl;
     if (mysql_query(&DB.conn, query) != 0)

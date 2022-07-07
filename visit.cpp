@@ -30,7 +30,7 @@ void Visit::ManageCheck()
     else
     {
         DB.sql_result = mysql_store_result(&DB.conn);
-        while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL)
+        while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL) // select 결과 없을 때 까지
         {
             cout << DB.sql_row[0] << "번 예약) " << DB.sql_row[1] << "님 예약날짜 : " << DB.sql_row[3] << " 장소 : " << DB.sql_row[2] << endl;
             check++;
@@ -52,7 +52,7 @@ void Visit::ManageModify()
     else
     {
         DB.sql_result = mysql_store_result(&DB.conn);
-        if (mysql_affected_rows(&DB.conn) == 0)
+        if (mysql_affected_rows(&DB.conn) == 0)  // query 실행 결과로 나온 행 개수 0이면
         {
             cout << "없는 번호입니다" << endl;
             return;
@@ -68,7 +68,6 @@ void Visit::ManageModify()
         cout << "장소 입력" << endl;
         cin >> change;
         sprintf(query, "SELECT beach FROM visit WHERE beach = '%s'", change.c_str());
-        cout<<query<<endl;
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else

@@ -71,7 +71,6 @@ void Guide::ManageModify()
         cout << "담당자 입력" << endl;
         cin >> change;
         sprintf(query, "SELECT guide FROM guide WHERE guide = '%s'", change.c_str());
-        cout<<query<<endl;
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else

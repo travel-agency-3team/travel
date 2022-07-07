@@ -68,7 +68,6 @@ void Stay::ManageModify()
         cout << "장소 입력" << endl;
         cin >> change;
         sprintf(query, "SELECT stayname FROM stay WHERE stayname = '%s'", change.c_str());
-        cout<<query<<endl;
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else
@@ -148,7 +147,6 @@ void Stay::ManageModify()
     }
 
     sprintf(query, "UPDATE staylist SET %s ='%s' where num = %d", column.c_str(), change.c_str(), num);
-    cout << query << endl;
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else

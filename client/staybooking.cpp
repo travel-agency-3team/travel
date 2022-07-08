@@ -1,11 +1,11 @@
 #include "staybooking.h"
 using namespace std;
 
-void StayBooking::Menu()
+void StayBooking::Menu(string ID)
 {
+    loginID = ID;
     cout<<"1) 숙박 예약 하기"<<endl;
     cout<<"2) 숙박 예약 조회"<<endl;
-
 }
 
 void StayBooking::Choose()
@@ -111,7 +111,6 @@ string StayBooking::Date()
 
 void StayBooking::Book()
 {
-    string ID ="qqq";
     where = Location();
     if(where == "0")
         return;
@@ -120,7 +119,7 @@ void StayBooking::Book()
     if(date == "0")
         return;
     
-    sprintf(query, "INSERT INTO staylist (id, stayname, staydate) VALUES ('%s', '%s', '%s')", ID.c_str(), where.c_str(), date.c_str());
+    sprintf(query, "INSERT INTO staylist (id, stayname, staydate) VALUES ('%s', '%s', '%s')", loginID.c_str(), where.c_str(), date.c_str());
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else
@@ -132,9 +131,8 @@ void StayBooking::Book()
 void StayBooking::Check()
 {
     cout<<"== 예약 목록 =="<<endl;
-    string ID= "qqq";
     int check = 0;
-    sprintf(query, "SELECT stayname, staydate FROM staylist WHERE id = '%s'", ID.c_str());
+    sprintf(query, "SELECT stayname, staydate FROM staylist WHERE id = '%s'", loginID.c_str());
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else
@@ -142,7 +140,7 @@ void StayBooking::Check()
         DB.sql_result = mysql_store_result(&DB.conn);
         while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL)
         {
-            cout << ID << "님 예약 날짜: " << DB.sql_row[1] << " 예약 숙소 : " << DB.sql_row[0] << endl;
+            cout << loginID << "님 예약 날짜: " << DB.sql_row[1] << " 예약 숙소 : " << DB.sql_row[0] << endl;
             check++;
         }
         if (check == 0)
@@ -177,7 +175,6 @@ void StayBooking::Change()
 
 void StayBooking::Modify()
 {
-    string ID= "qqq";
     cout<<"1) 날짜 수정"<<endl;
     cout<<"2) 숙소 수정"<<endl;
     cin>>choice;
@@ -193,7 +190,7 @@ void StayBooking::Modify()
             date = Date();
             if(date == "0")
                 return;
-            sprintf(query, "UPDATE staylist SET staydate ='%s' where stayname = '%s' AND id = '%s'", date.c_str(), where.c_str(), ID.c_str());
+            sprintf(query, "UPDATE staylist SET staydate ='%s' where stayname = '%s' AND id = '%s'", date.c_str(), where.c_str(), loginID.c_str());
             if (mysql_query(&DB.conn, query) != 0)
                 fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
             else
@@ -209,7 +206,7 @@ void StayBooking::Modify()
             where = Location();
             if(where == "0")
                 return;
-            sprintf(query, "UPDATE staylist SET stayname ='%s' where staydate = '%s' AND id = '%s'", where.c_str(), date.c_str(), ID.c_str());
+            sprintf(query, "UPDATE staylist SET stayname ='%s' where staydate = '%s' AND id = '%s'", where.c_str(), date.c_str(), loginID.c_str());
             if (mysql_query(&DB.conn, query) != 0)
                 fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
             else
@@ -232,7 +229,6 @@ void StayBooking::Modify()
 
 void StayBooking::Delete()
 {
-    string ID = "qqq";
     cout<<"취소하고 싶은 ";
     where = Location();
     if(where == "0")
@@ -241,7 +237,7 @@ void StayBooking::Delete()
     date = Date();
     if(date == "0")
         return;
-    sprintf(query, "DELETE FROM staylist WHERE stayname = '%s' AND staydate = '%s' AND id = '%s'", where.c_str(), date.c_str(), ID.c_str());
+    sprintf(query, "DELETE FROM staylist WHERE stayname = '%s' AND staydate = '%s' AND id = '%s'", where.c_str(), date.c_str(), loginID.c_str());
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else

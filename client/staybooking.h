@@ -12,12 +12,13 @@ class StayBooking
         char query[100];
         std::string where;
         std::string date;
-        Database DB;
-    public:
+        std::string loginID;
         std::string Location();
         std::string Date();
+        Database DB;
+    public:
         void Book();
-        void Menu();
+        void Menu(std::string ID);
         void Choose();
         void Check();
         void Change();

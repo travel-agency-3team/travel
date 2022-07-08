@@ -58,14 +58,15 @@ void Page::LoginPage(string loginID)
         
             break;
         case 2:
-        
+
             break;
         case 3:
             stay.Menu(loginID);
             stay.Choose();
             break;
         case 4:
-            
+            guide.Menu(loginID);
+            guide.Choose();
             break;
         case 5:
             login = false;

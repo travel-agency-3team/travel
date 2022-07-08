@@ -5,12 +5,15 @@
 #include "staybooking.h"
 #include "login.h"
 #include "signup.h"
+#include "guidebooking.h"
+
 using namespace std;
 class Page
 {
 private:
     StayBooking stay;
-
+    GuideBooking guide;
+    
     string loginID, membership;
     int num, sel;
     bool repeat;

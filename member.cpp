@@ -39,7 +39,7 @@ void Member::Sel()
 
 void Member::Check()
 {
-    int check = 0;
+    bool check = true;
     for (int i = 0; i < 2; i++)
     {
         if (i == 0)
@@ -59,10 +59,10 @@ void Member::Check()
             DB.sql_result = mysql_store_result(&DB.conn);
             while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL)
             {
-                check++;
+                check = false;
                 cout << "ID : " << DB.sql_row[0] << "\tName : " << DB.sql_row[1] << endl;
             }
-            if (check == 0)
+            if (check)
                 cout << "회원 목록이 없습니다" << endl;
         }
     }
@@ -166,9 +166,9 @@ void Member::Delete()
 
 void Member::Withdraw()
 {
-    int check = 0;
+    bool check = true;
     cout << "== 탈퇴 회원 목록 ==" << endl;
-    sprintf(query, "SELECT * FROM withdraw");
+    sprintf(query, "SELECT id, membership FROM withdraw");
     if (mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
     else
@@ -176,10 +176,10 @@ void Member::Withdraw()
         DB.sql_result = mysql_store_result(&DB.conn);
         while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL)
         {
-            check++;
+            check=false;
             cout << "ID : " << DB.sql_row[0] << "\tgrade : " << DB.sql_row[1] << endl;
         }
-        if (check == 0)
+        if (check)
             cout << "탈퇴한 회원이 없습니다" << endl;
     }
 }

@@ -22,7 +22,7 @@ void Visit::Check()
 
 void Visit::ManageCheck()
 {
-    int check = 0;
+    bool check = true;
     sprintf(query, "SELECT * FROM visitlist");
     cout << "== 예약 내역 ==" << endl;
     if (mysql_query(&DB.conn, query) != 0)
@@ -33,9 +33,9 @@ void Visit::ManageCheck()
         while ((DB.sql_row = mysql_fetch_row(DB.sql_result)) != NULL) // select 결과 없을 때 까지
         {
             cout << DB.sql_row[0] << "번 예약) " << DB.sql_row[1] << "님 예약날짜 : " << DB.sql_row[3] << " 장소 : " << DB.sql_row[2] << endl;
-            check++;
+            check = false;
         }
-        if (check == 0)
+        if (check)
             cout << "예약 내역이 없습니다" << endl;
     }
 }

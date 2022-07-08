@@ -13,10 +13,10 @@ class StayBooking
         std::string where;
         std::string date;
         std::string loginID;
-        std::string Location();
-        std::string Date();
         Database DB;
     public:
+        std::string Location();
+        std::string Date();
         void Book();
         void Menu(std::string ID);
         void Choose();

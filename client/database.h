@@ -26,13 +26,13 @@ public:
         }
         else
         {
-            puts("Database connect!");
+            //puts("Database connect!");
         }
     }
     ~Database()
     {
         mysql_close(&conn);
-        puts("Database close!");
+        //puts("Database close!");
     }
 };
 #endif

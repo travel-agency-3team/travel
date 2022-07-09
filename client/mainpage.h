@@ -6,6 +6,9 @@
 #include "login.h"
 #include "signup.h"
 #include "guidebooking.h"
+#include "membermanage.h"
+#include "visitreservation.h"
+#include "visit.h"
 
 using namespace std;
 class Page
@@ -13,7 +16,11 @@ class Page
 private:
     StayBooking stay;
     GuideBooking guide;
-    
+    Management manage;
+    Login v; 
+    Signup l;
+    Visitreservation visit;
+    Visit visitcheck;
     string loginID, membership;
     int num, sel;
     bool repeat;

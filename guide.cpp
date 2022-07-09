@@ -70,7 +70,7 @@ void Guide::ManageModify()
         column = "guidepic";
         cout << "담당자 입력" << endl;
         cin >> change;
-        sprintf(query, "SELECT guide FROM guide WHERE guide = '%s'", change.c_str());
+        sprintf(query, "SELECT pic FROM guide WHERE pic = '%s'", change.c_str());
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else
@@ -310,7 +310,7 @@ void Guide::Edit()
     cin>>guidenum;
     cin.ignore();
     sprintf(query, "SELECT num FROM guide WHERE num = '%d'", guidenum);
-    cout<<query<<endl;
+
     if(mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database error : %s\n", mysql_error(&DB.conn));
     else
@@ -324,7 +324,7 @@ void Guide::Edit()
         cout<<"담당자명을 입력하세요"<<endl;
         cin>>name;
         sprintf(query, "UPDATE guide SET pic = '%s' WHERE num = %d", name.c_str(), guidenum);
-        cout<<query<<endl;
+
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else

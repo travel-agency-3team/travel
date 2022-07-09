@@ -309,7 +309,6 @@ void Visit::Edit()
     cin>>visitnum;
     cin.ignore();
     sprintf(query, "SELECT num FROM visit WHERE num = '%d'", visitnum);
-    cout<<query<<endl;
     if(mysql_query(&DB.conn, query) != 0)
         fprintf(stderr, "database error : %s\n", mysql_error(&DB.conn));
     else
@@ -344,7 +343,6 @@ void Visit::Edit()
                 return;
         }
         sprintf(query, "UPDATE visit SET %s = '%s' WHERE num = %d", column.c_str(), change.c_str(), visitnum);
-        cout<<query<<endl;
         if (mysql_query(&DB.conn, query) != 0)
             fprintf(stderr, "database connect error : %s\n", mysql_error(&DB.conn));
         else

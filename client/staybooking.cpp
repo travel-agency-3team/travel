@@ -42,7 +42,7 @@ string StayBooking::Location()
         }
     }
     return where;
-
+    
 }
 
 string StayBooking::Date()
@@ -224,8 +224,6 @@ void StayBooking::Modify()
             return;
     }
 }
-
-
 
 void StayBooking::Delete()
 {

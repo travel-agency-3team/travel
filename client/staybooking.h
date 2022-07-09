@@ -4,7 +4,6 @@
 #include "database.h"
 #include <iostream>
 
-
 class StayBooking
 {
     private:
@@ -13,10 +12,10 @@ class StayBooking
         std::string where;
         std::string date;
         std::string loginID;
-        Database DB;
-    public:
         std::string Location();
         std::string Date();
+        Database DB;
+    public:
         void Book();
         void Menu(std::string ID);
         void Choose();

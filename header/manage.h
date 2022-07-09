@@ -7,8 +7,10 @@
 
 class Manage
 {
-protected:
+private:
     int choice;
+protected:
+    
     char query[1024];
     Database DB;
 
